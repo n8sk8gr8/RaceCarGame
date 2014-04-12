@@ -2,36 +2,33 @@
 using System.Collections;
 
 public class firstCar : MonoBehaviour {
-
+	public WheelCollider wheelFR;
+	public WheelCollider wheelFL;
+	public WheelCollider wheelRR;
+	public WheelCollider wheelRL;
+	public float maxTorque;
+	public float brake;
 	// Use this for initialization
 	void Start () {
-	
+		maxTorque = 50;
+		rigidbody.centerOfMass = new Vector3(0, -0.9f, 0);
+		brake = 80;
 	}
 
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKey(KeyCode.UpArrow))
-		{
-			transform.Translate (0, 0, -10f * Time.deltaTime);
-			
-		}
+		wheelRR.motorTorque = maxTorque * Input.GetAxis ("Vertical");
+		wheelRL.motorTorque = maxTorque * Input.GetAxis ("Vertical");
+		wheelFR.steerAngle = 10 * Input.GetAxis ("Horizontal");
+		wheelFL.steerAngle = 10 * Input.GetAxis ("Horizontal");
 
-		if(Input.GetKey(KeyCode.DownArrow))
-		{
-			transform.Translate (0, 0, 10f * Time.deltaTime);
+		wheelRR.brakeTorque = 0;
+		wheelRL.brakeTorque = 0;
 
-		}
-
-		if(Input.GetKey(KeyCode.LeftArrow))
+		if (Input.GetKey (KeyCode.Space)) 
 		{
-			transform.Translate (10f * Time.deltaTime, 0, 0);
-			
-		}
-
-		if(Input.GetKey(KeyCode.RightArrow))
-		{
-			transform.Translate (-10f * Time.deltaTime, 0, 0);
-			
+			wheelRR.brakeTorque = brake;
+			wheelRL.brakeTorque = brake;
 		}
 	}
 }
