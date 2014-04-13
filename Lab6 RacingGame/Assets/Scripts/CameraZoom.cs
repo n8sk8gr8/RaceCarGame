@@ -14,7 +14,7 @@ public class CameraZoom : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		distance = 7f;
+		distance = 5.5f;
 		height = 2f;
 		rotationDamping = 2.8f;
 		heightDamping = 2.2f;

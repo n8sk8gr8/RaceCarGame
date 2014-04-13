@@ -11,6 +11,11 @@ public class firstCar : MonoBehaviour {
 	float topSpeed;
 	float lowSpeedTurning;
 	float highSpeedTurning;
+	public bool applyingbrake;
+	float maxBrakeTorque;
+	float sidewaysFrictionSlip;
+	float forwardFrictionSlip;
+
 	// Use this for initialization
 	void Start () {
 		maxTorque = 50;
@@ -19,6 +24,12 @@ public class firstCar : MonoBehaviour {
 		topSpeed = 60;
 		lowSpeedTurning = 12;
 		highSpeedTurning = 1;
+		applyingbrake = false;
+		maxBrakeTorque = 80;
+
+		sidewaysFrictionSlip = 0.04f;
+		forwardFrictionSlip = 0.08f;
+
 	}
 
 	// Update is called once per frame
@@ -43,11 +54,82 @@ public class firstCar : MonoBehaviour {
 			wheelRL.brakeTorque = 0;
 		}
 
+		if(rigidbody.velocity.magnitude <  10)
+		{
+			SetSlip(1, 1);
+		}
+
 		// Brake When the spacebar is pressed
-		if (Input.GetKey (KeyCode.Space)) 
+		if(Input.GetKey (KeyCode.B))
 		{
 			wheelRR.brakeTorque = brake;
 			wheelRL.brakeTorque = brake;
 		}
+
+		if (Input.GetKey (KeyCode.Space)) 
+		{
+			HandBrake ();
+		}
+	}
+
+	void HandBrake ()
+	{
+		if(Input.GetKey(KeyCode.Space))
+		{
+			applyingbrake = true;
+		}
+		else
+		{
+			applyingbrake = false;
+		}
+		if(applyingbrake)
+		{
+			wheelRR.brakeTorque  = maxBrakeTorque;
+			wheelRL.brakeTorque  = maxBrakeTorque;
+
+			wheelRR.motorTorque = 0;
+			wheelRL.motorTorque = 0;
+			SetSlip(forwardFrictionSlip, sidewaysFrictionSlip);
+		}
+//		else
+//		{
+//			wheelRR.brakeTorque = 0;
+//			wheelRL.brakeTorque = 0;
+//			SetSlip(1, 1);
+//		}
+	}
+
+	void SetSlip(float vechicleForwardFriction, float vechicleSidewaysFriction)
+	{
+		WheelFrictionCurve temp;
+		temp = wheelRR.forwardFriction;
+		temp.stiffness = vechicleForwardFriction;
+		wheelRR.forwardFriction = temp;
+		Debug.Log (vechicleForwardFriction);
+
+		temp = wheelRL.forwardFriction;
+		temp.stiffness = vechicleForwardFriction;
+		wheelRL.forwardFriction = temp;
+
+		temp = wheelFR.forwardFriction;
+		temp.stiffness = vechicleForwardFriction;
+
+		temp = wheelFL.forwardFriction;
+		temp.stiffness = vechicleForwardFriction;
+
+
+		temp = wheelRR.sidewaysFriction;
+		temp.stiffness = vechicleSidewaysFriction;
+		wheelRR.sidewaysFriction = temp;
+
+		temp = wheelRL.sidewaysFriction;
+		temp.stiffness = vechicleSidewaysFriction;
+		wheelRL.sidewaysFriction = temp;
+
+		temp = wheelFR.sidewaysFriction;
+		temp.stiffness = vechicleSidewaysFriction;
+
+		temp = wheelFL.sidewaysFriction;
+		temp.stiffness = vechicleSidewaysFriction;
 	}
 }
