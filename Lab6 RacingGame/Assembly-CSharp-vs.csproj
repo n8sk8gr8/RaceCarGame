@@ -48,8 +48,8 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\CameraZoom.cs" />
      <Compile Include="Assets\Scripts\DestorySkidSound.cs" />
+     <Compile Include="Assets\Scripts\FrenchClassicCarController.cs" />
      <Compile Include="Assets\Scripts\SkidScript.cs" />
-     <Compile Include="Assets\Scripts\firstCar.cs" />
      <None Include="Assets\Standard Assets\Skyboxes\_skybox info.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
