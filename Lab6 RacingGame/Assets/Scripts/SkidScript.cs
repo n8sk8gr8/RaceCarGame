@@ -59,7 +59,7 @@ public class SkidScript : MonoBehaviour {
 
 		Mesh treadMarkMesh = new Mesh ();
 		Vector3[] vertices = new Vector3[4];
-		int[] triangles = new int[6] {0, 1, 2, 2, 3, 0};
+		int[] triangles = new int[6] {2, 1, 0, 0, 3, 2};
 		Vector3 tempVector = new Vector3(skidMarkWidth, 0.01f, 0);
 		if(skidding == 0)
 		{
@@ -107,5 +107,6 @@ public class SkidScript : MonoBehaviour {
 		treadMarkMesh.uv = UVmap;
 		meshFilter.mesh = treadMarkMesh;
 		mark.renderer.material = skidMaterial;
+		mark.AddComponent<DestorySkidSound> ();
 	}
 }

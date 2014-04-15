@@ -46,6 +46,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\RacingGameLogic.cs" />
      <Compile Include="Assets\Scripts\CameraZoom.cs" />
      <Compile Include="Assets\Scripts\DestorySkidSound.cs" />
      <Compile Include="Assets\Scripts\FrenchClassicCarController.cs" />

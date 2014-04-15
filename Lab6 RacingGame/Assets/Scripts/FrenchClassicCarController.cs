@@ -54,7 +54,7 @@ public class FrenchClassicCarController : MonoBehaviour {
 			wheelRL.brakeTorque = 0;
 		}
 
-		if(rigidbody.velocity.magnitude <  10)
+		if(rigidbody.velocity.magnitude <  25)
 		{
 			SetSlip(1, 1);
 		}
@@ -66,10 +66,10 @@ public class FrenchClassicCarController : MonoBehaviour {
 			wheelRL.brakeTorque = brake;
 		}
 
-		if (Input.GetKey (KeyCode.Space)) 
-		{
+//		if (Input.GetKey (KeyCode.Space)) 
+//		{
 			HandBrake ();
-		}
+		//}
 	}
 
 	void HandBrake ()
@@ -91,6 +91,10 @@ public class FrenchClassicCarController : MonoBehaviour {
 			wheelRL.motorTorque = 0;
 			SetSlip(forwardFrictionSlip, sidewaysFrictionSlip);
 		}
+		else
+		{
+			SetSlip (1, 1);
+		}
 	}
 
 	void SetSlip(float vechicleForwardFriction, float vechicleSidewaysFriction)
@@ -106,9 +110,11 @@ public class FrenchClassicCarController : MonoBehaviour {
 
 		temp = wheelFR.forwardFriction;
 		temp.stiffness = vechicleForwardFriction;
+		wheelFR.forwardFriction = temp;
 
 		temp = wheelFL.forwardFriction;
 		temp.stiffness = vechicleForwardFriction;
+		wheelFL.forwardFriction = temp;
 
 
 		temp = wheelRR.sidewaysFriction;
@@ -121,8 +127,11 @@ public class FrenchClassicCarController : MonoBehaviour {
 
 		temp = wheelFR.sidewaysFriction;
 		temp.stiffness = vechicleSidewaysFriction;
+		wheelFR.sidewaysFriction = temp;
 
 		temp = wheelFL.sidewaysFriction;
 		temp.stiffness = vechicleSidewaysFriction;
+		wheelFL.sidewaysFriction = temp;
+
 	}
 }
