@@ -48,10 +48,10 @@
   <ItemGroup>
      <Compile Include="Assets\AI_Script\AiCarScript.cs" />
      <Compile Include="Assets\AI_Script\path_script.cs" />
-     <Compile Include="Assets\RacingGameLogic.cs" />
      <Compile Include="Assets\Scripts\CameraZoom.cs" />
      <Compile Include="Assets\Scripts\DestorySkidSound.cs" />
      <Compile Include="Assets\Scripts\FrenchClassicCarController.cs" />
+     <Compile Include="Assets\Scripts\RacingGameLogic.cs" />
      <Compile Include="Assets\Scripts\SkidScript.cs" />
      <None Include="Assets\Standard Assets\Skyboxes\_skybox info.txt" />
   </ItemGroup>

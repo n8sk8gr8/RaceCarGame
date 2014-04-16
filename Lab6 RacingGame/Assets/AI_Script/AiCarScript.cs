@@ -7,7 +7,7 @@ public class AiCarScript : MonoBehaviour {
 	public Transform pathGroup;
 	public Transform[] path_objs;
 	public float maxSteer =15.0f;
-	public WheelCollider wheelFL ;
+	public WheelCollider wheelFL;
 	public WheelCollider wheelFR;
 	public int currentPathObj;
 

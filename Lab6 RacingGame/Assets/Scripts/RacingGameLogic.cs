@@ -11,7 +11,6 @@ public class RacingGameLogic : MonoBehaviour {
 	public bool raceCompleted;
 	// Use this for initialization
 	void Start () {
-		//currentWaypoint = 0;
 		currentLap = 0;
 		numberOfLabs = 1;
 		raceCompleted = false;
@@ -22,8 +21,6 @@ public class RacingGameLogic : MonoBehaviour {
 		{
 			allWayPoints[i]	= GameObject.Find("Waypoint" + (i + 1));
 		}
-		//allWayPoints[0]	= GameObject.Find("Waypoint1");
-		//allWayPoints[1]	= GameObject.Find("Waypoint1");
 		checkPoints = new bool[10];
 	}
 	
@@ -33,17 +30,15 @@ public class RacingGameLogic : MonoBehaviour {
 		{
 			wayPointTriggered(allWayPoints[i].collider, i);
 		}
-		//wayPointTriggered(allWayPoints[0].collider);
 	}
 
 	public void wayPointTriggered(Collider waypoint, int position)
 	{
 		float distance = (cars [0].transform.position - waypoint.transform.position).magnitude;
 
-		if((cars[0].transform.position - waypoint.transform.position).magnitude < 10)
+		if(distance < 10)
 		{
 			checkPoints[position] = true;
-			//Debug.Log (distance);
 		}
 		raceWon ();
 	}
