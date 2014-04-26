@@ -23,7 +23,7 @@ public class AiCarScript : MonoBehaviour {
 		for (int i = 0; i < path_objs.Length; i++) 
 		{
 			path[i] = path_objs[i];
-			Debug.Log(path[i]);
+
 		}
 
 
@@ -37,6 +37,7 @@ public class AiCarScript : MonoBehaviour {
 	void GetSteer()
 	{
 		Vector3 steerVector = transform.InverseTransformPoint (path [currentPathObj].position.x, transform.position.y, path [currentPathObj].position.z);
+		Debug.Log(currentPathObj);
 		float newSteer = maxSteer * (steerVector.x / steerVector.magnitude);
 		wheelFL.steerAngle = newSteer;
 		wheelFR.steerAngle = newSteer;
