@@ -16,6 +16,7 @@ public class RacingGameLogic : MonoBehaviour {
 		raceCompleted = false;
 		cars = new GameObject[2];
 		cars [0] = GameObject.Find ("FrenchClassicCar");
+		cars[1] = GameObject.Find ("RivalCar");
 		allWayPoints = new GameObject[10];
 		for(int i = 0; i < allWayPoints.Length; i++)
 		{
@@ -35,6 +36,13 @@ public class RacingGameLogic : MonoBehaviour {
 	public void wayPointTriggered(Collider waypoint, int position)
 	{
 		float distance = (cars [0].transform.position - waypoint.transform.position).magnitude;
+		float ai_Car_distance = (cars [1].transform.position - waypoint.transform.position).magnitude;
+
+		if(ai_Car_distance < 10)
+		{
+			checkPoints[position] = true;
+		}
+		raceWon ();
 
 		if(distance < 10)
 		{
