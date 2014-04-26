@@ -15,6 +15,8 @@ public class FrenchClassicCarController : MonoBehaviour {
 	float maxBrakeTorque;
 	float sidewaysFrictionSlip;
 	float forwardFrictionSlip;
+	public float currentSpeed;
+	public float maxSpeed;
 
 	// Use this for initialization
 	void Start () {
@@ -26,6 +28,7 @@ public class FrenchClassicCarController : MonoBehaviour {
 		highSpeedTurning = 1;
 		applyingbrake = false;
 		maxBrakeTorque = 80;
+		maxSpeed = 150;
 
 		sidewaysFrictionSlip = 0.04f;
 		forwardFrictionSlip = 0.08f;
@@ -34,8 +37,21 @@ public class FrenchClassicCarController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		wheelRR.motorTorque = -maxTorque * Input.GetAxis ("Vertical");
-		wheelRL.motorTorque = -maxTorque * Input.GetAxis ("Vertical");
+		currentSpeed = 2 * Mathf.PI * wheelRL.radius * wheelRL.rpm * 60 / 1000;
+		currentSpeed = Mathf.Abs (Mathf.Round(currentSpeed));
+
+		if(currentSpeed < maxSpeed)
+		{
+			wheelRR.motorTorque = -maxTorque * Input.GetAxis ("Vertical");
+			wheelRL.motorTorque = -maxTorque * Input.GetAxis ("Vertical");
+			Debug.Log("Speed Still increasing");
+		}
+		else
+		{
+			wheelRR.brakeTorque = 0;
+			wheelRL.brakeTorque = 0;
+			Debug.Log("Speed Not increasing");
+		}
 
 		float speed = rigidbody.velocity.magnitude / topSpeed;
 		float currentSteeringAngle = Mathf.Lerp (lowSpeedTurning, highSpeedTurning, speed);
@@ -66,10 +82,7 @@ public class FrenchClassicCarController : MonoBehaviour {
 			wheelRL.brakeTorque = brake;
 		}
 
-//		if (Input.GetKey (KeyCode.Space)) 
-//		{
 			HandBrake ();
-		//}
 	}
 
 	void HandBrake ()
