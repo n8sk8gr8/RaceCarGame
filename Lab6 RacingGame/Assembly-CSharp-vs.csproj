@@ -46,6 +46,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\AI_Script\AIWheelScript.cs" />
      <Compile Include="Assets\AI_Script\AiCarScript.cs" />
      <Compile Include="Assets\AI_Script\path_script.cs" />
      <Compile Include="Assets\Scripts\CameraZoom.cs" />
