@@ -36,6 +36,7 @@
 -define:ENABLE_PROFILER
 -define:UNITY_EDITOR
 -define:UNITY_EDITOR_OSX
+'Assets/AI_Script/AIWheelScript.cs'
 'Assets/AI_Script/AiCarScript.cs'
 'Assets/AI_Script/path_script.cs'
 'Assets/Scripts/CameraZoom.cs'

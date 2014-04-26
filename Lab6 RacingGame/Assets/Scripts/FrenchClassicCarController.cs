@@ -48,8 +48,8 @@ public class FrenchClassicCarController : MonoBehaviour {
 		}
 		else
 		{
-			wheelRR.brakeTorque = 0;
-			wheelRL.brakeTorque = 0;
+			wheelRR.motorTorque = 0;
+			wheelRL.motorTorque = 0;
 			Debug.Log("Speed Not increasing");
 		}
 

@@ -14,8 +14,8 @@ public class AiCarScript : MonoBehaviour {
 	public WheelCollider wheelRR;
 	public int currentPathObj;
 	public float distFromPath = 20.0f;
-	public float maxTorque = 50.0f;
-	public float currentSpeed ;
+	public float maxTorque = 50;
+	public float currentSpeed;
 	public float topSpeed = 150.0f;
 	public float decellarationSpeed =10.0f;
 
