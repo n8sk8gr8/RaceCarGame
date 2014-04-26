@@ -23,7 +23,10 @@ public class AiCarScript : MonoBehaviour {
 		for (int i = 0; i < path_objs.Length; i++) 
 		{
 			path[i] = path_objs[i];
+			Debug.Log(path[i]);
 		}
+
+
 	}
 
 	// Update is called once per frame
