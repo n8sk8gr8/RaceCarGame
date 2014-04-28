@@ -17,6 +17,9 @@ public class RacingGameLogic : MonoBehaviour {
 	Quaternion aiCarOrientation;
 	string checkWho;
 	string winOrLose;
+
+
+	//public GameObject resetPath;
 	// Use this for initialization
 	void Start () {
 		currentLap = 0;
@@ -114,32 +117,11 @@ public class RacingGameLogic : MonoBehaviour {
 			{
 				Application.Quit();
 			}
-
 		}
 	}
 
 	void playAgain()
 	{
-		aiCarCompletedRace = false;
-		playerCompletedRace = false;
-		cars [0].rigidbody.velocity = new Vector3 (0, 0, 0);
-		cars [0].rigidbody.angularVelocity = new Vector3 (0, 0, 0);
-		cars [0].transform.position = playerStartPosition;
-		cars [0].transform.rotation = Quaternion.Euler(playerOrientation.x, playerOrientation.y, playerOrientation.z);
-
-		cars [1].rigidbody.velocity = new Vector3 (0, 0, 0);
-		cars [1].rigidbody.angularVelocity = new Vector3 (0, 0, 0);
-		cars [1].transform.position = aiCarStartPosition;
-		cars [1].transform.rotation = Quaternion.Euler(aiCarOrientation.x, aiCarOrientation.y, aiCarOrientation.z);
-		resetGame ();
-	}
-
-	void resetGame()
-	{
-		for(int i = 0; i < allWayPoints.Length; i++)
-		{
-			checkPoints[i] = false;
-			aiCheckPoints[i] = false;
-		}
+		Application.LoadLevel (1);
 	}
 }
