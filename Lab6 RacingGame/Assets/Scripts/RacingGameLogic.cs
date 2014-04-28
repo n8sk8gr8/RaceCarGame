@@ -11,15 +11,9 @@ public class RacingGameLogic : MonoBehaviour {
 	public bool[] aiCheckPoints;
 	public bool playerCompletedRace;
 	public bool aiCarCompletedRace;
-	Vector3 playerStartPosition;
-	Quaternion playerOrientation;
-	Vector3 aiCarStartPosition;
-	Quaternion aiCarOrientation;
 	string checkWho;
 	string winOrLose;
-
-
-	//public GameObject resetPath;
+	
 	// Use this for initialization
 	void Start () {
 		currentLap = 0;
@@ -28,11 +22,6 @@ public class RacingGameLogic : MonoBehaviour {
 		aiCarCompletedRace = false;
 		cars = new GameObject[2];
 		cars [0] = GameObject.Find ("FrenchClassicCar");
-		playerStartPosition = new Vector3(480, 0.41f, 683.9f);
-		playerOrientation = new Quaternion (359, 174, 359, 1);
-
-		aiCarStartPosition = new Vector3 (480, 0.41f, 700);
-		aiCarOrientation = new Quaternion (0, 0, 0, 1);
 		cars[1] = GameObject.Find ("RivalCar");
 		allWayPoints = new GameObject[10];
 		for(int i = 0; i < allWayPoints.Length; i++)
@@ -123,5 +112,15 @@ public class RacingGameLogic : MonoBehaviour {
 	void playAgain()
 	{
 		Application.LoadLevel (1);
+	}
+
+	public bool playerWon()
+	{
+		return playerCompletedRace;
+	}
+
+	public bool computerWon()
+	{
+		return aiCarCompletedRace;
 	}
 }

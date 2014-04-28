@@ -17,8 +17,9 @@ public class FrenchClassicCarController : MonoBehaviour {
 	float forwardFrictionSlip;
 	public float currentSpeed;
 	public float maxSpeed;
-	Texture2D speedODiameter;
-	Texture2D dial;
+	public Texture2D speedODiameter;
+	public Texture2D dial;
+	bool speedODiameterGUIEnabled;
 
 	// Use this for initialization
 	void Start () {
@@ -31,6 +32,7 @@ public class FrenchClassicCarController : MonoBehaviour {
 		applyingbrake = false;
 		maxBrakeTorque = 80;
 		maxSpeed = 150;
+		speedODiameterGUIEnabled = true;
 
 		sidewaysFrictionSlip = 0.04f;
 		forwardFrictionSlip = 0.08f;
@@ -146,5 +148,23 @@ public class FrenchClassicCarController : MonoBehaviour {
 		temp.stiffness = vechicleSidewaysFriction;
 		wheelFL.sidewaysFriction = temp;
 
+	}
+
+	void OnGUI()
+	{
+		RacingGameLogic hideGUI = GameObject.Find ("Waypoint1").GetComponent<RacingGameLogic>();
+		if(hideGUI.playerWon() == true || hideGUI.computerWon() == true)
+		{
+			speedODiameterGUIEnabled = false;
+		}
+
+		if(speedODiameterGUIEnabled == true)
+		{
+			GUI.DrawTexture (new Rect (0, Screen.height - 150, 300, 150), speedODiameter);
+			float speedRatio = Mathf.Abs(currentSpeed / maxSpeed);
+			float rotationAngle = Mathf.Lerp (0, 180, speedRatio);
+			GUIUtility.RotateAroundPivot (rotationAngle, new Vector2(150, Screen.height));
+			GUI.DrawTexture (new Rect (0, Screen.height - 150, 300, 300), dial);
+		}
 	}
 }
