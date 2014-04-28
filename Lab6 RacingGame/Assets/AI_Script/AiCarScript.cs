@@ -7,7 +7,7 @@ public class AiCarScript : MonoBehaviour {
 	public Transform[] path;
 	public Transform pathGroup;
 	public Transform[] path_objs;
-	public float maxSteer =22.0f;
+	public float maxSteer = 22.0f;
 	public WheelCollider wheelFL;
 	public WheelCollider wheelFR;
 	public WheelCollider wheelRL;
@@ -52,7 +52,7 @@ public class AiCarScript : MonoBehaviour {
 
 		if (steerVector.magnitude <= distFromPath) 
 		{
-					Debug.Log(currentPathObj);
+					//Debug.Log(currentPathObj);
 						currentPathObj++;
 		}
 		if (currentPathObj >= path.Length) 
@@ -67,8 +67,8 @@ public class AiCarScript : MonoBehaviour {
 		currentSpeed = Mathf.Round (currentSpeed);  
 		if (currentSpeed <= topSpeed) 
 		{ 
-						wheelRL.motorTorque = maxTorque * 4;
-						wheelRR.motorTorque = maxTorque * 4;
+						wheelRL.motorTorque = maxTorque * 0.7f;
+						wheelRR.motorTorque = maxTorque * 0.7f;
 						wheelRL.brakeTorque = 0;  
 						wheelRR.brakeTorque = 0;  
 		} 
@@ -76,8 +76,8 @@ public class AiCarScript : MonoBehaviour {
 		{
 			wheelRL.motorTorque=0;
 			wheelRR.motorTorque=0;
-//			wheelRL.brakeTorque = decellarationSpeed;  
-//			wheelRR.brakeTorque = decellarationSpeed; 
+			wheelRL.brakeTorque = decellarationSpeed;  
+			wheelRR.brakeTorque = decellarationSpeed; 
 		}
 	}
 }

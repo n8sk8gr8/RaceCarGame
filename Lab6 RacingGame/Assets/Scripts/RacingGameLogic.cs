@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections; 
 
 public class RacingGameLogic : MonoBehaviour {
 	public int currentWaypoint;
@@ -8,20 +8,30 @@ public class RacingGameLogic : MonoBehaviour {
 	public GameObject[] cars;
 	public GameObject[] allWayPoints;
 	public bool[] checkPoints;
-	public bool raceCompleted;
+	public bool[] aiCheckPoints;
+	public bool playerCompletedRace;
+	public bool aiCarCompletedRace;
+	string checkWho;
+	string winOrLose;
+	
 	// Use this for initialization
 	void Start () {
 		currentLap = 0;
 		numberOfLabs = 1;
-		raceCompleted = false;
+		playerCompletedRace = false;
+		aiCarCompletedRace = false;
 		cars = new GameObject[2];
 		cars [0] = GameObject.Find ("FrenchClassicCar");
+		cars[1] = GameObject.Find ("RivalCar");
 		allWayPoints = new GameObject[10];
 		for(int i = 0; i < allWayPoints.Length; i++)
 		{
 			allWayPoints[i]	= GameObject.Find("Waypoint" + (i + 1));
 		}
 		checkPoints = new bool[10];
+		aiCheckPoints = new bool[10];
+		winOrLose = "";
+		checkWho = "";
 	}
 	
 	// Update is called once per frame
@@ -35,24 +45,82 @@ public class RacingGameLogic : MonoBehaviour {
 	public void wayPointTriggered(Collider waypoint, int position)
 	{
 		float distance = (cars [0].transform.position - waypoint.transform.position).magnitude;
+		float ai_Car_distance = (cars [1].transform.position - waypoint.transform.position).magnitude;
+
+		if(ai_Car_distance < 10)
+		{
+			aiCheckPoints[position] = true;
+		}
+		checkWho = "Player";
+		raceWon ();
 
 		if(distance < 10)
 		{
 			checkPoints[position] = true;
 		}
+		checkWho = "Ai";
 		raceWon ();
 	}
 
 	public void raceWon()
 	{
-		foreach(bool checkPoint in checkPoints)
+		if(checkWho == "Player")
 		{
-			if(checkPoint == false)
+			foreach(bool checkPoint in checkPoints)
 			{
-				return;
+				if(checkPoint == false)
+				{
+					return;
+				}
+			}
+			playerCompletedRace = true;
+			winOrLose = "WON";
+			OnGUI ();
+		}
+		if(checkWho == "Ai")
+		{
+		foreach(bool checkPoint in aiCheckPoints)
+			{
+				if(checkPoint == false)
+				{
+					return;
+				}
+			}
+			aiCarCompletedRace = true;
+			winOrLose = "Lost";
+			OnGUI ();
+		}
+	}
+
+	void OnGUI()
+	{
+		if(playerCompletedRace == true || aiCarCompletedRace == true)
+		{
+			GUI.Box (new Rect (0, 0,  Screen.width, Screen.height), "YOU " + winOrLose + " THE RACE!!!!");
+			if(GUI.Button (new Rect (Screen.width/4, Screen.height * 3/4, 80, 20), "Play Again?"))
+			{
+				playAgain();
+			}
+
+			if(GUI.Button (new Rect (Screen.width * 3/4, Screen.height * 3/4, 80, 20), "Quit"))
+			{
+				Application.Quit();
 			}
 		}
-		raceCompleted = true;
-		Debug.LogWarning ("YOU WON THE RACE!!!!");
+	}
+
+	void playAgain()
+	{
+		Application.LoadLevel (1);
+	}
+
+	public bool playerWon()
+	{
+		return playerCompletedRace;
+	}
+
+	public bool computerWon()
+	{
+		return aiCarCompletedRace;
 	}
 }
