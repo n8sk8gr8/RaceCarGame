@@ -94,9 +94,9 @@ public class RacingGameLogic : MonoBehaviour {
 
 	void OnGUI()
 	{
-		if(playerCompletedRace == true || aiCarCompletedRace == true)
+		//if(playerCompletedRace == true || aiCarCompletedRace == true)
 		{
-			GUI.Box (new Rect (0, 0,  Screen.width, Screen.height), "YOU " + winOrLose + " THE RACE!!!!");
+			//GUI.Box (new Rect (0, 0,  Screen.width, Screen.height), "YOU " + winOrLose + " THE RACE!!!!");
 			if(GUI.Button (new Rect (Screen.width/4, Screen.height * 3/4, 80, 20), "Play Again?"))
 			{
 				playAgain();
