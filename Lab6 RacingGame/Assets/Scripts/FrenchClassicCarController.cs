@@ -17,6 +17,8 @@ public class FrenchClassicCarController : MonoBehaviour {
 	float forwardFrictionSlip;
 	public float currentSpeed;
 	public float maxSpeed;
+	Texture2D speedODiameter;
+	Texture2D dial;
 
 	// Use this for initialization
 	void Start () {
@@ -44,13 +46,11 @@ public class FrenchClassicCarController : MonoBehaviour {
 		{
 			wheelRR.motorTorque = -maxTorque * Input.GetAxis ("Vertical");
 			wheelRL.motorTorque = -maxTorque * Input.GetAxis ("Vertical");
-			Debug.Log("Speed Still increasing");
 		}
 		else
 		{
 			wheelRR.motorTorque = 0;
 			wheelRL.motorTorque = 0;
-			Debug.Log("Speed Not increasing");
 		}
 
 		float speed = rigidbody.velocity.magnitude / topSpeed;

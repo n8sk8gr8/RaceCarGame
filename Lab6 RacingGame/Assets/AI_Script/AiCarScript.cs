@@ -52,7 +52,7 @@ public class AiCarScript : MonoBehaviour {
 
 		if (steerVector.magnitude <= distFromPath) 
 		{
-					Debug.Log(currentPathObj);
+					//Debug.Log(currentPathObj);
 						currentPathObj++;
 		}
 		if (currentPathObj >= path.Length) 
