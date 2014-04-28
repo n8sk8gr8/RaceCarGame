@@ -67,8 +67,8 @@ public class AiCarScript : MonoBehaviour {
 		currentSpeed = Mathf.Round (currentSpeed);  
 		if (currentSpeed <= topSpeed) 
 		{ 
-						wheelRL.motorTorque = maxTorque * 1.35f;
-						wheelRR.motorTorque = maxTorque * 1.35f;
+						wheelRL.motorTorque = maxTorque * 0.7f;
+						wheelRR.motorTorque = maxTorque * 0.7f;
 						wheelRL.brakeTorque = 0;  
 						wheelRR.brakeTorque = 0;  
 		} 
