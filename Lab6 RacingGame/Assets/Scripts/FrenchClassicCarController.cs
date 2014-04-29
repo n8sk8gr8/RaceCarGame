@@ -41,6 +41,17 @@ public class FrenchClassicCarController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+
+		if(Input.GetKey(KeyCode.Escape))
+		{
+			Application.Quit();
+		}
+		
+		if(Input.GetKey(KeyCode.R))
+		{
+			Application.LoadLevel(1);
+		}
+
 		currentSpeed = 2 * Mathf.PI * wheelRL.radius * wheelRL.rpm * 60 / 1000;
 		currentSpeed = Mathf.Abs (Mathf.Round(currentSpeed));
 
